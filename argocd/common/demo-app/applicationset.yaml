@@ -13,32 +13,28 @@ spec:
         generators:
           ## https://argocd-applicationset.readthedocs.io/en/stable/Generators-Git/
           - git:
-              repoURL: https://github.com/ishuar/argocd-multi-cluster.git
-              revision: main
+              repoURL: https://github.com/diaryevil/argocd-multi-cluster.git
+              revision: yeyx-dev
               files:
-                - path: "argocd/envs/**/**/**/demo-app/git-generator-overides.json"
+                - path: "argocd/envs/**/demo-app/git-generator-overides.json"
           ## https://argocd-applicationset.readthedocs.io/en/stable/Generators-Cluster/
           - clusters:
               selector:
                 matchLabels:
                   app.kubernetes.io/part-of: '{{.environment}}-fleet' ## filter on environment type
-                  cluster-region: '{{index .path.segments 4}}'        ## filter on region type
-                  cloud-provider: '{{index .path.segments 3}}'        ## filter on cloud type
                   argocd.argoproj.io/secret-type: cluster
 
   template:
     metadata:
-      name: 'demo-app-{{index .path.segments 2}}-{{index .path.segments 3}}-{{index .path.segments 4}}'
+      name: 'demo-app-{{index .path.segments 2}}'
       labels:
         app.kubernetes.io/component: argocd-application
         app.kubernetes.io/part-of: '{{.environment}}-fleet'
-        cluster-region: '{{index .path.segments 4}}'
-        cloud-provider: '{{index .path.segments 3}}'
     spec:
       project: default ## Can use dynamic project name from git file generator. (project shoud be created before hand and can be part of bootstrap)
       sources:
-        - repoURL: 'https://github.com/ishuar/argocd-multi-cluster.git'
-          targetRevision: main
+        - repoURL: 'https://github.com/diaryevil/argocd-multi-cluster.git'
+          targetRevision: yeyx-dev
           path: ./charts/sample-app
           helm:
             releaseName: demo-app
@@ -46,8 +42,8 @@ spec:
             valueFiles:
               - $values/{{.path.path}}/values.yaml
             skipCrds: false
-        - repoURL: 'https://github.com/ishuar/argocd-multi-cluster.git'
-          targetRevision: main
+        - repoURL: 'https://github.com/diaryevil/argocd-multi-cluster.git'
+          targetRevision: yeyx-dev
           ref: values
       destination:
         server: '{{.server}}'
