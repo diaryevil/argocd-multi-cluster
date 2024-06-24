@@ -8,12 +8,12 @@ spec:
   goTemplate: true
   goTemplateOptions: ['missingkey=error']
   generators:
-    ## https://argocd-applicationset.readthedocs.io/en/stable/Generators-Git/
-    - git:
-        repoURL: https://github.com/diaryevil/argocd-multi-cluster.git
-        revision: yeyx-dev
-        files:
-          - path: "argocd/envs/**/demo-app/git-generator-overides.json"
+  ## https://argocd-applicationset.readthedocs.io/en/stable/Generators-Git/
+  - git:
+      repoURL: https://github.com/diaryevil/argocd-multi-cluster.git
+      revision: yeyx-dev
+      files:
+      - path: "argocd/envs/**/demo-app/git-generator-overides.json"
   template:
     metadata:
       name: 'demo-app-{{index .path.segments 2}}'
