@@ -46,7 +46,7 @@ spec:
           targetRevision: yeyx-dev
           ref: values
       destination:
-        server: '{{.server}}'
+        server: https://kubernetes.default.svc
         namespace: '{{.path.basenameNormalized}}'
       syncPolicy:
         ## https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/#automated-sync-policy
