@@ -8,28 +8,17 @@ spec:
   goTemplate: true
   goTemplateOptions: ['missingkey=error']
   generators:
-    # https://argocd-applicationset.readthedocs.io/en/stable/Generators-Matrix/
-    - matrix:
-        generators:
-          ## https://argocd-applicationset.readthedocs.io/en/stable/Generators-Git/
-          - git:
-              repoURL: https://github.com/diaryevil/argocd-multi-cluster.git
-              revision: yeyx-dev
-              files:
-                - path: "argocd/envs/**/demo-app/git-generator-overides.json"
-          ## https://argocd-applicationset.readthedocs.io/en/stable/Generators-Cluster/
-          - clusters:
-              selector:
-                matchLabels:
-                  app.kubernetes.io/part-of: '{{.environment}}-fleet' ## filter on environment type
-                  argocd.argoproj.io/secret-type: cluster
-
+    ## https://argocd-applicationset.readthedocs.io/en/stable/Generators-Git/
+    - git:
+        repoURL: https://github.com/diaryevil/argocd-multi-cluster.git
+        revision: yeyx-dev
+        files:
+          - path: "argocd/envs/**/demo-app/git-generator-overides.json"
   template:
     metadata:
       name: 'demo-app-{{index .path.segments 2}}'
       labels:
         app.kubernetes.io/component: argocd-application
-        app.kubernetes.io/part-of: '{{.environment}}-fleet'
     spec:
       project: default ## Can use dynamic project name from git file generator. (project shoud be created before hand and can be part of bootstrap)
       sources:
@@ -47,7 +36,7 @@ spec:
           ref: values
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{.path.basenameNormalized}}'
+        namespace: myapp
       syncPolicy:
         ## https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/#automated-sync-policy
         automated:
