@@ -36,7 +36,7 @@ spec:
           ref: values
       destination:
         server: https://kubernetes.default.svc
-        namespace: myapp
+        namespace: '{{.path.basenameNormalized}}'
       syncPolicy:
         ## https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/#automated-sync-policy
         automated:
