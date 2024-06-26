@@ -16,7 +16,6 @@ spec:
       - path: "argocd/envs/**/git-generator-overides.json"
       values:
         appName: 'demo-app'
-        sprintVersion: '20240630'
   template:
     metadata:
       name: 'demo-app-{{index .path.segments 2}}'
@@ -28,7 +27,7 @@ spec:
       sources:
         - repoURL: 'https://github.com/diaryevil/argocd-multi-cluster.git'
           targetRevision: yeyx-dev
-          path: ./charts/{{.values.sprintVersion}}/sample-app
+          path: ./charts/{{.sprint-versions.demo-app}}/sample-app
           helm:
             releaseName: '{{.values.appName}}'
             # Helm values files for overriding values in the helm chart
