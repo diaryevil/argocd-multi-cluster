@@ -1,6 +1,6 @@
 {
   "environment": "dev",
-  "sprint-versions": {
-    "demo-app": "20240730"
+  "sprintVersions": {
+    "demoApp": "20240730"
   }
 }

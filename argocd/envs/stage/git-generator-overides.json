@@ -1,6 +1,6 @@
 {
   "environment": "stage",
-  "sprint-versions": {
-    "demo-app": "20240630"
+  "sprintVersions": {
+    "demoApp": "20240630"
   }
 }

@@ -27,7 +27,7 @@ spec:
       sources:
         - repoURL: 'https://github.com/diaryevil/argocd-multi-cluster.git'
           targetRevision: yeyx-dev
-          path: ./charts/{{.sprint-versions.demo-app}}/sample-app
+          path: ./charts/{{.sprintVersions.demoApp}}/sample-app
           helm:
             releaseName: '{{.values.appName}}'
             # Helm values files for overriding values in the helm chart
